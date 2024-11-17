@@ -1,158 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
     <title>Static Resume</title>
     <link
-    href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
-    rel="stylesheet"/>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="main-container">
+      <div class="form-container">
+        <div class="progress">
+          <ul class="progress-steps">
+            <li class="step active">
+              <span>1</span>
+              <p>Personal</p>
+            </li>
+            <li class="step">
+              <span>2</span>
+              <p>Contact</p>
+            </li>
+            <li class="step">
+              <span>3</span>
+              <p>Skills</p>
+            </li>
+            <li class="step">
+              <span>4</span>
+              <p>Education</p>
+            </li>
+            <li class="step">
+              <span>5</span>
+              <p>Experience</p>
+            </li>
+          </ul>
+        </div>
+        <form class="form-wrpr">
+          <!-- <div class="form-msg active"><p>Added Successfully</p></div> -->
+          <div class="form-personal form-step active">
+            <h2>Personal Information</h2>
+            <div>
+              <input type="file" id="form-img" accept="image/*">
+            </div>
+            <div>
+              <label for="">First Name</label>
+              <input type="text" id="form-first-name" placeholder="e.g. Muhammad">
+            </div>
+            <div>
+              <label for="">Last Name</label>
+              <input type="text" id="form-last-name" placeholder="e.g. Fuzail">
+            </div>
+            <div>
+              <label for="">Occupation</label>
+              <input type="text" id="form-occupation" placeholder="e.g. Web Developer">
+            </div>
+            <div>
+              <label for="">About me</label>
+              <textarea name="" id="form-about-me" placeholder="e.g. I am Software Engineer with more than 2 years of experience."></textarea>
+            </div>
+            <div>
+              <button class="form-btn" id="add-personal-info-btn">Add to CV</button>
+            </div>
+          </div>
+
+          <div class="form-contact form-step">
+            <h2>Contact Information</h2>
+            <div>
+              <label for="">Email</label>
+              <input type="email" id="form-email" placeholder="e.g. mfuzail591@gmail">
+            </div>
+            <div>
+              <label for="">Phone</label>
+              <input type="text" id="form-contact" placeholder="e.g. 0312-3456789">
+            </div>
+            <div>
+              <label for="">Address</label>
+              <input type="text" id="form-address" placeholder="e.g. Islamabad">
+            </div>
+            <div>
+              <button class="form-btn" id="add-contact-btn">Add to CV</button>
+            </div>
+          </div>
+
+          <div class="form-skills form-step">
+            <h2>Skills</h2>
+            <div>
+              <label for="">Skill Title</label>
+              <input type="text" name="form" id="form-skill-title" placeholder="e.g. ReactJS">
+            </div>
+            <div>
+              <label for="">Proficiency</label>
+              <input type="number" id="form-skill-proficiency" placeholder="90/100" max="100" min="0">
+            </div>
+            <div>
+              <button class="form-btn" id="add-skill-btn">Add to CV</button>
+            </div>
+          </div>
+
+          <div class="form-education form-step">
+            <h2>Education</h2>
+            <div>
+              <label for="">Degree Title</label>
+              <input type="text" id="form-education-title" placeholder="e.g. BSSE">
+            </div>
+            <div>
+              <label for="">School Name</label>
+              <input type="text" id="form-education-institute" placeholder="e.g. Sindh Madrassatul Islam University">
+            </div>
+            <div>
+              <label for="">Start Date</label>
+              <input type="month" id="form-education-start-date">
+            </div>
+            <div>
+              <label for="">End Date</label>
+              <input type="month" id="form-education-end-date">
+            </div>
+            <div>
+              <label for="">Percentage</label>
+              <input type="number" id="form-education-percentage" min="0" max="100" placeholder="e.g. 90/100"></input>
+            </div>
+            <div>
+              <button class="form-btn" id="add-education-btn">Add to CV</button>
+            </div>
+          </div>
+          
+          <div class="form-experience form-step">
+            <h2>Experience</h2>
+            <div>
+              <label for="">Company Name</label>
+              <input type="text" id="form-experience-company" placeholder="e.g. CodeBite">
+            </div>
+            <div>
+              <label for="">Your Role</label>
+              <input type="text" id="form-experience-role" placeholder="e.g. Software Engineer">
+            </div>
+            <div>
+              <label for="">Start Date</label>
+              <input type="month" id="form-experience-start-date">
+            </div>
+            <div>
+              <label for="">End Date</label>
+              <input type="month" id="form-experience-end-date">
+            </div>
+            <div>
+              <label for="">Description</label>
+              <textarea id="form-experience-description" placeholder="e.g. I worked with Dynamic team as team lead"></textarea>
+            </div>
+            <div>
+              <button class="form-btn" id="add-experience-btn">Add to CV</button>
+            </div>
+          </div>
+
+          <div class="btn-wrpr">
+            <button class="btn" id="form-btn-next">Next</button>
+          </div>
+        </form>
+      </div>
+      <div class="cv-container">
         <div class="cv-left">
-            <!-- Main Image -->
-            <div class="cv-left-img"></div>
-            <div class="cv-left-intro">
-                <div class="name">
-                    <span class="first-name">Muhammad</span>
-                    <span class="last-name">Fuzail</span>
-                </div>
-                <hr class="hr">
-                <small class="occupation">Web Developer</small>
+          <!-- Main Image -->
+          <img class="cv-left-img" id="cv-image-preview" src="M Fuzail.jpeg"></img>
+
+          <div class="cv-left-intro">
+            <div class="name">
+              <span class="cv-first-name">Muhammad</span>
+              <span class="cv-last-name">Fuzail</span>
             </div>
-            <div class="cv-left-contact">
-                <h2 class="contact-heading"><i class="ri-contacts-line ico"></i>CONTACT</h2>
-                <div class="email-wrapper cnt-wrpr">
-                    <i class="ri-mail-line contact-ico"></i> <p class="user-email cnt-content">mfuzail591@gmail.com</p> 
-                </div>
-                <div class="cnt-wrpr">
-                    <i class="ri-phone-line contact-ico"></i> <p class="user-phone cnt-content">+92 302 8130124</p> 
-                </div>
-                <div class="address-wrapper cnt-wrpr">
-                    <i class="ri-map-pin-line contact-ico"></i> <p class="user-address cnt-content">Intelligence Colony, Sultan Abad, Karachi</p> 
-                </div>
+            <hr class="hr" />
+            <small class="cv-occupation">Web Developer</small>
+          </div>
+          <div class="cv-left-contact">
+            <h2 class="contact-heading">
+              <i class="ri-contacts-line ico"></i>CONTACT
+            </h2>
+            <div class="email-wrapper cnt-wrpr">
+              <i class="ri-mail-line contact-ico"></i>
+              <p class="cv-user-email cnt-content">mfuzail591@gmail.com</p>
             </div>
-        
-            <div class="cv-left-skills">
-                <div class="skill-head">
-                    <i class="ri-tools-line ico"></i>
-                    <h2 class="skills-heading">SKILLS</h2>
-                    <button class="skill-btn">Show<i class="ri-arrow-down-s-line skill-icon"></i></button>
-                </div>
-                <div class="skills-container">
-                    <div class="skill-wrpr">
-                        <p class="user-skill">HTML</p> 
-                        <div class="level">
-                            <div class="internal-level"></div>
-                        </div> 
-                    </div>
-                    <div class="skill-wrpr">
-                        <p class="user-skill">HTML</p> 
-                        <div class="level">
-                            <div class="internal-level"></div>
-                        </div> 
-                    </div>
-                    <div class="skill-wrpr">
-                        <p class="user-skill">HTML</p>
-                        <div class="level">
-                            <div class="internal-level"></div>
-                        </div>
-                    </div>
-                </div>
-                
+            <div class="cnt-wrpr">
+              <i class="ri-phone-line contact-ico"></i>
+              <p class="cv-user-phone cnt-content">+92 302 8130124</p>
             </div>
+            <div class="address-wrapper cnt-wrpr">
+              <i class="ri-map-pin-line contact-ico"></i>
+              <p class="cv-user-address cnt-content">
+                Intelligence Colony, Sultan Abad, Karachi
+              </p>
+            </div>
+          </div>
+  
+          <div class="cv-left-skills">
+            <div class="skill-head">
+              <i class="ri-tools-line ico"></i>
+              <h2 class="skills-heading">SKILLS</h2>
+              <!-- <button class="skill-btn">
+                Show<i class="ri-arrow-down-s-line skill-icon"></i>
+              </button> -->
+            </div>
+            <div class="skills-container">
+              
+            </div>
+          </div>
         </div>
         <div class="cv-right">
-            <div class="cv-right-child cv-right-about">
-                <h2 class="h2-right"><i class="ri-user-fill h2-ico"></i>ABOUT ME</h2>
-                <p class="about-child">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime deserunt, eum, alias excepturi nesciunt nostrum nulla ratione eos deleniti sit, veniam ipsam laborum voluptatibus tempore.</p>
-            </div>
-            <div class="cv-right-child cv-right-education">
-                <h2 class="h2-right"><i class="ri-lightbulb-flash-fill h2-ico"></i>EDUCATION</h2>
-                <div class="education-child">
-                    
-                    <div class="title-name">
-                        <h4>SCHOOL NAME 1</h4>
-                        <div class="date">
-                            <span class="start-date">Jan 2024 -</span>
-                            <span class="end-date">Dec 2024</span>
-                        </div>
-                        
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur consequuntur eaque tempore ut iste aliquid!</p>
-                </div>
-                <div class="education-child">
-                    
-                    <div class="title-name">
-                        <h4>SCHOOL NAME 1</h4>
-                        <div class="date">
-                            <span class="start-date">Jan 2024 -</span>
-                            <span class="end-date">Dec 2024</span>
-                        </div>
-                        
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur consequuntur eaque tempore ut iste aliquid!</p>
-                </div>
-                <div class="education-child">
-                    
-                    <div class="title-name">
-                        <h4>SCHOOL NAME 1</h4>
-                        <div class="date">
-                            <span class="start-date">Jan 2024 -</span>
-                            <span class="end-date">Dec 2024</span>
-                        </div>
-                        
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur consequuntur eaque tempore ut iste aliquid!</p>
-                </div>
-            </div>
-            <div class="cv-right-child cv-right-experience">
-                <h2 class="h2-right"><i class="ri-briefcase-4-fill h2-ico"></i>EXPERIENCE</h2>
-                <div class="education-child">
-                    
-                    <div class="title-name">
-                        <h4>SCHOOL NAME 1</h4>
-                        <div class="date">
-                            <span class="start-date">Jan 2024 -</span>
-                            <span class="end-date">Dec 2024</span>
-                        </div>
-                        
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur consequuntur eaque tempore ut iste aliquid!</p>
-                </div>
-                <div class="education-child">
-                    
-                    <div class="title-name">
-                        <h4>SCHOOL NAME 1</h4>
-                        <div class="date">
-                            <span class="start-date">Jan 2024 -</span>
-                            <span class="end-date">Dec 2024</span>
-                        </div>
-                        
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur consequuntur eaque tempore ut iste aliquid!</p>
-                </div>
-                <div class="education-child">
-                    
-                    <div class="title-name">
-                        <h4>SCHOOL NAME 1</h4>
-                        <div class="date">
-                            <span class="start-date">Jan 2024 -</span>
-                            <span class="end-date">Dec 2024</span>
-                        </div>
-                        
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur consequuntur eaque tempore ut iste aliquid!</p>
-                </div>
-            </div>
+          <div class="cv-right-child cv-right-about">
+            <h2 class="h2-right"><i class="ri-user-fill h2-ico"></i>ABOUT ME</h2>
+            <p class="about-child">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+              deserunt, eum, alias excepturi nesciunt nostrum nulla ratione eos
+              deleniti sit, veniam ipsam laborum voluptatibus tempore.
+            </p>
+          </div>
+          <div class="cv-right-child cv-right-education">
+            <h2 class="h2-right">
+              <i class="ri-lightbulb-flash-fill h2-ico"></i>EDUCATION
+            </h2>
+          </div>
+          <div class="cv-right-child cv-right-experience">
+            <h2 class="h2-right">
+              <i class="ri-briefcase-4-fill h2-ico"></i>EXPERIENCE
+            </h2>
+            
+          </div>
         </div>
+      </div>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

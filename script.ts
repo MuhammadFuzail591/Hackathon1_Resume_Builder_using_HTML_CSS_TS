@@ -111,21 +111,82 @@ const userExperienceBtn: HTMLElement | null =
 const experienceContainer: HTMLElement | null = document.querySelector(
   '.cv-right-experience'
 )
-function areFieldsFilled(inputs: (HTMLInputElement | null)[]): boolean {
-  return inputs.every(input => input?.value.trim() !== "");
-}
-function formatMonthYear(dateValue: string): string {
-  const [year, month] = dateValue.split('-'); // Split the YYYY-MM format
-  const monthNames = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ];
-  return `${monthNames[parseInt(month, 10) - 1]} ${year}`;
-}
+const cvPersonalInfoSection: HTMLElement | null =
+  document.querySelector('.cv-left-intro')
+const formMsg: HTMLElement | null = document.querySelector('.form-msg')
+const cvContactSection: HTMLElement | null =
+  document.querySelector('.cv-left-contact')
+const cvskillsSection: HTMLElement | null =
+  document.querySelector('.cv-left-skills')
+const cvSkillWrapper: HTMLElement | null = document.querySelector('.skill-wrpr')
+const cvEducationSection: HTMLElement | null = document.querySelector(
+  '.cv-right-education'
+)
+const cvExperienceSection: HTMLElement | null = document.querySelector(
+  '.cv-right-experience'
+)
 
+cvPersonalInfoSection?.addEventListener('click', () => {
+  active = 1
+  loadToPersonalInfoForm()
+  scrollTop()
+  updateForm()
+})
+userImageDOM?.addEventListener('click', () => {
+  active = 1
+  scrollTop()
+  updateForm()
+})
+cvContactSection?.addEventListener('click', () => {
+  active = 2
+  updateForm()
+  scrollTop()
+  loadToContactForm()
+})
+cvskillsSection?.addEventListener('click', () => {
+  active = 3
+  updateForm()
+  console.log(cvSkillWrapper)
+  scrollTop()
+  FormMessageShow('Loaded Successfully, You Can add Skill')
+})
+cvEducationSection?.addEventListener('click', () => {
+  active = 4
+  updateForm()
+  scrollTop()
+  FormMessageShow('Loaded Successfully, You Can add Education')
+})
+cvExperienceSection?.addEventListener('click', () => {
+  active = 5
+  updateForm()
+  scrollTop()
+  FormMessageShow('Loaded Successfully, You Can add Experience')
+})
+
+function areFieldsFilled (inputs: (HTMLInputElement | null)[]): boolean {
+  return inputs.every(input => input?.value.trim() !== '')
+}
+function formatMonthYear (dateValue: string): string {
+  const [year, month] = dateValue.split('-') // Split the YYYY-MM format
+  const monthNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ]
+  return `${monthNames[parseInt(month, 10) - 1]} ${year}`
+}
 
 userPersonalInfoBtn?.addEventListener('click', (e: Event) => {
-  e.preventDefault();
+  e.preventDefault()
 
   const inputs = [
     userFirstNameInput,
@@ -133,47 +194,48 @@ userPersonalInfoBtn?.addEventListener('click', (e: Event) => {
     userOccupationInput,
     userAboutInput,
     userImageInput
-  ];
+  ]
 
   if (!areFieldsFilled(inputs)) {
-    alert("Please fill in all fields in Personal Info!");
-    return;
+    FormMessageShow('Please fill in all fields in Personal Info!')
+    return
   }
 
-  updatePersonalInfo();
-  clearPersonalInfoForm();
-});
+  updatePersonalInfo()
+  clearPersonalInfoForm()
+})
 
 userContactBtn?.addEventListener('click', (e: Event) => {
-  e.preventDefault();
+  e.preventDefault()
 
-  const inputs = [userEmailInput, userContactInput, userAddressInput];
+  const inputs = [userEmailInput, userContactInput, userAddressInput]
 
   if (!areFieldsFilled(inputs)) {
-    alert("Please fill in all fields in Contact Info!");
-    return;
+    FormMessageShow('Please fill in all fields in Contact Info!')
+    return
   }
 
-  updateContactInfo();
-  clearContactInfoForm();
-});
+  updateContactInfo()
+  clearContactInfoForm()
+})
 
 userSkillBtn?.addEventListener('click', (e: Event) => {
-  e.preventDefault();
+  e.preventDefault()
 
-  const inputs = [userSkillTitleInput, userSkillProficiencyInput];
+  const inputs = [userSkillTitleInput, userSkillProficiencyInput]
 
   if (!areFieldsFilled(inputs)) {
-    alert("Please fill in all fields in Skills!");
-    return;
+    FormMessageShow('Please fill in all fields in Skills!')
+    return
   }
 
-  addSkill();
-  clearSkillForm();
-});
+  addSkill()
+  FormMessageShow('Skill Added Successfully..You can Add More')
+  clearSkillForm()
+})
 
 userEducationBtn?.addEventListener('click', (e: Event) => {
-  e.preventDefault();
+  e.preventDefault()
 
   const inputs = [
     userEducationTitleInput,
@@ -181,19 +243,20 @@ userEducationBtn?.addEventListener('click', (e: Event) => {
     userEducationEndInput,
     userEducationInstituteInput,
     userEducationPercentageInput
-  ];
+  ]
 
   if (!areFieldsFilled(inputs)) {
-    alert("Please fill in all fields in Education!");
-    return;
+    FormMessageShow('Please fill in all fields in Education!')
+    return
   }
 
-  addEducation();
-  clearEducationForm();
-});
+  addEducation()
+  FormMessageShow('Education Added Successfully..You can Add More')
+  clearEducationForm()
+})
 
 userExperienceBtn?.addEventListener('click', (e: Event) => {
-  e.preventDefault();
+  e.preventDefault()
 
   const inputs = [
     userExperienceTitleInput,
@@ -201,16 +264,17 @@ userExperienceBtn?.addEventListener('click', (e: Event) => {
     userExperienceEndInput,
     userExperienceCompanyInput,
     userExperienceDescriptionInput
-  ];
+  ]
 
   if (!areFieldsFilled(inputs)) {
-    alert("Please fill in all fields in Experience!");
-    return;
+    FormMessageShow('Please fill in all fields in Experience!')
+    return
   }
 
-  addExperience();
-  clearExperienceForm();
-});
+  addExperience()
+  FormMessageShow('Experience Added Successfully..You can Add More')
+  clearExperienceForm()
+})
 
 nextBtn?.addEventListener('click', e => {
   e.preventDefault()
@@ -223,7 +287,6 @@ nextBtn?.addEventListener('click', e => {
 
 function updateForm () {
   formSteps.forEach((step, i) => {
-    console.log(step, i, active)
     if (i == active - 1) {
       step.classList.add('active')
       progressSteps[i].classList.add('active')
@@ -309,11 +372,11 @@ function addEducation (): void {
   const educationPercentage = userEducationPercentageInput?.value
 
   const formattedStartDate = educationStartDate
-  ? formatMonthYear(educationStartDate)
-  : '';
-const formattedEndDate = educationEndDate
-  ? formatMonthYear(educationEndDate)
-  : '';
+    ? formatMonthYear(educationStartDate)
+    : ''
+  const formattedEndDate = educationEndDate
+    ? formatMonthYear(educationEndDate)
+    : ''
   const newEducation = document.createElement('div')
   newEducation.classList.add('education-child')
   newEducation.innerHTML = `
@@ -337,13 +400,12 @@ function addExperience (): void {
   const experienceCompany = userExperienceCompanyInput?.value
   const userExperienceDescription = userExperienceDescriptionInput?.value
 
-
   const formattedStartDate = experienceStartDate
-  ? formatMonthYear(experienceStartDate)
-  : '';
-const formattedEndDate = experienceEndDate
-  ? formatMonthYear(experienceEndDate)
-  : '';
+    ? formatMonthYear(experienceStartDate)
+    : ''
+  const formattedEndDate = experienceEndDate
+    ? formatMonthYear(experienceEndDate)
+    : ''
 
   const newExperience = document.createElement('div')
   newExperience.classList.add('experience-child')
@@ -362,6 +424,7 @@ const formattedEndDate = experienceEndDate
 
   experienceContainer?.appendChild(newExperience)
 }
+
 function clearPersonalInfoForm (): void {
   // Clear text inputs
   if (userFirstNameInput) userFirstNameInput.value = ''
@@ -393,4 +456,62 @@ function clearExperienceForm (): void {
   if (userExperienceEndInput) userExperienceEndInput.value = ''
   if (userExperienceCompanyInput) userExperienceCompanyInput.value = ''
   if (userExperienceDescriptionInput) userExperienceDescriptionInput.value = ''
+}
+function FormMessageShow (msg: string): void {
+  if (formMsg) {
+    formMsg.textContent = msg || ''
+    formMsg.classList.add('active')
+    setTimeout(() => {
+      formMsg?.classList.remove('active')
+    }, 2000)
+  }
+}
+
+function loadToPersonalInfoForm (): void {
+  if (userFirstNameInput && userFirstNameDOM) {
+    userFirstNameInput.value = userFirstNameDOM.textContent || ''
+  }
+
+  if (userLastNameInput && userLastNameDOM) {
+    userLastNameInput.value = userLastNameDOM.textContent || ''
+  }
+
+  if (userOccupationInput && userOccupationDOM) {
+    userOccupationInput.value = userOccupationDOM.textContent || ''
+  }
+
+  if (userAboutInput && userAboutDom) {
+    userAboutInput.value = userAboutDom.textContent || ''
+  }
+
+  FormMessageShow('Loaded Successfully... You can edit Personal Info')
+  if (userPersonalInfoBtn)
+    userPersonalInfoBtn.textContent = 'Update Personal Info!'
+}
+function loadToContactForm (): void {
+  // Load Email
+  if (userEmailInput && userEmailDOM) {
+    userEmailInput.value = userEmailDOM.textContent || ''
+  }
+
+  // Load Phone/Contact
+  if (userContactInput && userPhoneDOM) {
+    userContactInput.value = userPhoneDOM.textContent || ''
+  }
+
+  // Load Address
+  if (userAddressInput && userAddressDOM) {
+    userAddressInput.value = userAddressDOM.textContent || ''
+  }
+
+  // Update the button text for clarity
+  if (userContactBtn) {
+    userContactBtn.textContent = 'Update Contact Info'
+  }
+
+  FormMessageShow('Loaded successfully.. You can Edit')
+}
+
+function scrollTop () {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }

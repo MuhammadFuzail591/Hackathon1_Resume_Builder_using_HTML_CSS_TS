@@ -56,14 +56,67 @@ var userExperienceDescriptionInput = document.querySelector('#form-experience-de
 var userExperienceBtn = document.getElementById('add-experience-btn');
 // Selecting DOM container for Experience section
 var experienceContainer = document.querySelector('.cv-right-experience');
+var cvPersonalInfoSection = document.querySelector('.cv-left-intro');
+var formMsg = document.querySelector('.form-msg');
+var cvContactSection = document.querySelector('.cv-left-contact');
+var cvskillsSection = document.querySelector('.cv-left-skills');
+var cvSkillWrapper = document.querySelector('.skill-wrpr');
+var cvEducationSection = document.querySelector('.cv-right-education');
+var cvExperienceSection = document.querySelector('.cv-right-experience');
+cvPersonalInfoSection === null || cvPersonalInfoSection === void 0 ? void 0 : cvPersonalInfoSection.addEventListener('click', function () {
+    active = 1;
+    loadToPersonalInfoForm();
+    scrollTop();
+    updateForm();
+});
+userImageDOM === null || userImageDOM === void 0 ? void 0 : userImageDOM.addEventListener('click', function () {
+    active = 1;
+    scrollTop();
+    updateForm();
+});
+cvContactSection === null || cvContactSection === void 0 ? void 0 : cvContactSection.addEventListener('click', function () {
+    active = 2;
+    updateForm();
+    scrollTop();
+    loadToContactForm();
+});
+cvskillsSection === null || cvskillsSection === void 0 ? void 0 : cvskillsSection.addEventListener('click', function () {
+    active = 3;
+    updateForm();
+    console.log(cvSkillWrapper);
+    scrollTop();
+    FormMessageShow('Loaded Successfully, You Can add Skill');
+});
+cvEducationSection === null || cvEducationSection === void 0 ? void 0 : cvEducationSection.addEventListener('click', function () {
+    active = 4;
+    updateForm();
+    scrollTop();
+    FormMessageShow('Loaded Successfully, You Can add Education');
+});
+cvExperienceSection === null || cvExperienceSection === void 0 ? void 0 : cvExperienceSection.addEventListener('click', function () {
+    active = 5;
+    updateForm();
+    scrollTop();
+    FormMessageShow('Loaded Successfully, You Can add Experience');
+});
 function areFieldsFilled(inputs) {
-    return inputs.every(function (input) { return (input === null || input === void 0 ? void 0 : input.value.trim()) !== ""; });
+    return inputs.every(function (input) { return (input === null || input === void 0 ? void 0 : input.value.trim()) !== ''; });
 }
 function formatMonthYear(dateValue) {
     var _a = dateValue.split('-'), year = _a[0], month = _a[1]; // Split the YYYY-MM format
     var monthNames = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec'
     ];
     return "".concat(monthNames[parseInt(month, 10) - 1], " ").concat(year);
 }
@@ -77,7 +130,7 @@ userPersonalInfoBtn === null || userPersonalInfoBtn === void 0 ? void 0 : userPe
         userImageInput
     ];
     if (!areFieldsFilled(inputs)) {
-        alert("Please fill in all fields in Personal Info!");
+        FormMessageShow('Please fill in all fields in Personal Info!');
         return;
     }
     updatePersonalInfo();
@@ -87,7 +140,7 @@ userContactBtn === null || userContactBtn === void 0 ? void 0 : userContactBtn.a
     e.preventDefault();
     var inputs = [userEmailInput, userContactInput, userAddressInput];
     if (!areFieldsFilled(inputs)) {
-        alert("Please fill in all fields in Contact Info!");
+        FormMessageShow('Please fill in all fields in Contact Info!');
         return;
     }
     updateContactInfo();
@@ -97,10 +150,11 @@ userSkillBtn === null || userSkillBtn === void 0 ? void 0 : userSkillBtn.addEven
     e.preventDefault();
     var inputs = [userSkillTitleInput, userSkillProficiencyInput];
     if (!areFieldsFilled(inputs)) {
-        alert("Please fill in all fields in Skills!");
+        FormMessageShow('Please fill in all fields in Skills!');
         return;
     }
     addSkill();
+    FormMessageShow('Skill Added Successfully..You can Add More');
     clearSkillForm();
 });
 userEducationBtn === null || userEducationBtn === void 0 ? void 0 : userEducationBtn.addEventListener('click', function (e) {
@@ -113,10 +167,11 @@ userEducationBtn === null || userEducationBtn === void 0 ? void 0 : userEducatio
         userEducationPercentageInput
     ];
     if (!areFieldsFilled(inputs)) {
-        alert("Please fill in all fields in Education!");
+        FormMessageShow('Please fill in all fields in Education!');
         return;
     }
     addEducation();
+    FormMessageShow('Education Added Successfully..You can Add More');
     clearEducationForm();
 });
 userExperienceBtn === null || userExperienceBtn === void 0 ? void 0 : userExperienceBtn.addEventListener('click', function (e) {
@@ -129,10 +184,11 @@ userExperienceBtn === null || userExperienceBtn === void 0 ? void 0 : userExperi
         userExperienceDescriptionInput
     ];
     if (!areFieldsFilled(inputs)) {
-        alert("Please fill in all fields in Experience!");
+        FormMessageShow('Please fill in all fields in Experience!');
         return;
     }
     addExperience();
+    FormMessageShow('Experience Added Successfully..You can Add More');
     clearExperienceForm();
 });
 nextBtn === null || nextBtn === void 0 ? void 0 : nextBtn.addEventListener('click', function (e) {
@@ -145,7 +201,6 @@ nextBtn === null || nextBtn === void 0 ? void 0 : nextBtn.addEventListener('clic
 });
 function updateForm() {
     formSteps.forEach(function (step, i) {
-        console.log(step, i, active);
         if (i == active - 1) {
             step.classList.add('active');
             progressSteps[i].classList.add('active');
@@ -296,4 +351,52 @@ function clearExperienceForm() {
         userExperienceCompanyInput.value = '';
     if (userExperienceDescriptionInput)
         userExperienceDescriptionInput.value = '';
+}
+function FormMessageShow(msg) {
+    if (formMsg) {
+        formMsg.textContent = msg || '';
+        formMsg.classList.add('active');
+        setTimeout(function () {
+            formMsg === null || formMsg === void 0 ? void 0 : formMsg.classList.remove('active');
+        }, 2000);
+    }
+}
+function loadToPersonalInfoForm() {
+    if (userFirstNameInput && userFirstNameDOM) {
+        userFirstNameInput.value = userFirstNameDOM.textContent || '';
+    }
+    if (userLastNameInput && userLastNameDOM) {
+        userLastNameInput.value = userLastNameDOM.textContent || '';
+    }
+    if (userOccupationInput && userOccupationDOM) {
+        userOccupationInput.value = userOccupationDOM.textContent || '';
+    }
+    if (userAboutInput && userAboutDom) {
+        userAboutInput.value = userAboutDom.textContent || '';
+    }
+    FormMessageShow('Loaded Successfully... You can edit Personal Info');
+    if (userPersonalInfoBtn)
+        userPersonalInfoBtn.textContent = 'Update Personal Info!';
+}
+function loadToContactForm() {
+    // Load Email
+    if (userEmailInput && userEmailDOM) {
+        userEmailInput.value = userEmailDOM.textContent || '';
+    }
+    // Load Phone/Contact
+    if (userContactInput && userPhoneDOM) {
+        userContactInput.value = userPhoneDOM.textContent || '';
+    }
+    // Load Address
+    if (userAddressInput && userAddressDOM) {
+        userAddressInput.value = userAddressDOM.textContent || '';
+    }
+    // Update the button text for clarity
+    if (userContactBtn) {
+        userContactBtn.textContent = 'Update Contact Info';
+    }
+    FormMessageShow('Loaded successfully.. You can Edit');
+}
+function scrollTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }

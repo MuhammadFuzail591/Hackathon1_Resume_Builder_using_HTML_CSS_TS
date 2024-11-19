@@ -1,10 +1,16 @@
+"use strict";
+// import { html2pdf } from 'html2pdf-ts'
+// import { HTML2PDFOptions } from 'html2pdf-ts/dist/types'
+Object.defineProperty(exports, "__esModule", { value: true });
 var skillShowBtn = document.querySelector('.skill-btn');
 var skillsContainer = document.querySelector('.skills-container');
 var skillIcon = document.querySelector('.skill-icon');
 var progressSteps = document.querySelectorAll('.step');
 var formSteps = document.querySelectorAll('.form-step');
 var nextBtn = document.getElementById('form-btn-next');
+var downloadBtn = document.getElementById('form-btn-download');
 var active = 1;
+downloadBtnFunc();
 progressSteps.forEach(function (step, i) {
     step.addEventListener('click', function () {
         active = i + 1;
@@ -63,6 +69,7 @@ var cvskillsSection = document.querySelector('.cv-left-skills');
 var cvSkillWrapper = document.querySelector('.skill-wrpr');
 var cvEducationSection = document.querySelector('.cv-right-education');
 var cvExperienceSection = document.querySelector('.cv-right-experience');
+var cvContainer = document.querySelector('.cv-container');
 cvPersonalInfoSection === null || cvPersonalInfoSection === void 0 ? void 0 : cvPersonalInfoSection.addEventListener('click', function () {
     active = 1;
     loadToPersonalInfoForm();
@@ -199,8 +206,16 @@ nextBtn === null || nextBtn === void 0 ? void 0 : nextBtn.addEventListener('clic
     active++;
     updateForm();
 });
+// downloadBtn?.addEventListener('click', () => {
+//   e.preventDefault();
+//   const firstName = userFirstNameInput?.value || 'FirstName'
+//   const lastName = userLastNameInput?.value || 'LastName'
+//   const fileName = ''.concat(firstName, '_').concat(lastName, '_resume.pdf')
+//   downloadCVFunc(fileName, '.cv-container')
+// })
 function updateForm() {
     formSteps.forEach(function (step, i) {
+        downloadBtnFunc();
         if (i == active - 1) {
             step.classList.add('active');
             progressSteps[i].classList.add('active');
@@ -400,3 +415,43 @@ function loadToContactForm() {
 function scrollTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+function downloadBtnFunc() {
+    if (active == 5) {
+        if (nextBtn)
+            nextBtn.style.display = 'none';
+        if (downloadBtn)
+            downloadBtn.style.display = 'block';
+    }
+    else {
+        if (downloadBtn)
+            downloadBtn.style.display = 'none';
+        if (nextBtn)
+            nextBtn.style.display = 'block';
+    }
+}
+// const downloadCVFunc = async (fileName: string, sectionSelector: string) => {
+//   try {
+//     // Select the section of the page to be converted
+//     const sectionElement = document.querySelector(sectionSelector)
+//     if (!sectionElement) {
+//       throw new Error(`No element found with selector: ${sectionSelector}`)
+//     }
+//     // Get the HTML content of the selected section
+//     const html = sectionElement.outerHTML
+//     // Configure PDF generation options
+//     const options: HTML2PDFOptions = {
+//       format: 'A4',
+//       filePath: `${fileName}.pdf`, // Use the provided file name
+//       landscape: false, // Portrait mode
+//       resolution: {
+//         height: 1920,
+//         width: 1080 // Resolution can be adjusted as needed
+//       }
+//     }
+//     // Generate the PDF
+//     await html2pdf.createPDF(html, options)
+//     console.log(`CV downloaded as: ${fileName}.pdf`)
+//   } catch (error) {
+//     console.error('Error generating PDF')
+//   }
+// }

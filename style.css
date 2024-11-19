@@ -206,14 +206,6 @@ body {
   box-shadow: rgba(253, 76, 0, 0.5) 0 3px 8px;
 }
 
-.btn-wrpr{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    overflow: hidden;
-}
 .btn{
     width: 90%;
     padding: 10px;

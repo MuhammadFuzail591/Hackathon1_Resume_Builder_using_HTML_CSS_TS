@@ -1,3 +1,8 @@
+// import { html2pdf } from 'html2pdf-ts'
+// import { HTML2PDFOptions } from 'html2pdf-ts/dist/types'
+
+import { html2pdf, HTML2PDFOptions } from "html2pdf-ts"
+
 const skillShowBtn: HTMLElement | null = document.querySelector('.skill-btn')
 const skillsContainer: HTMLElement | null =
   document.querySelector('.skills-container')
@@ -8,8 +13,11 @@ const progressSteps: NodeListOf<HTMLElement> =
 const formSteps: NodeListOf<HTMLElement> =
   document.querySelectorAll('.form-step')
 const nextBtn: HTMLElement | null = document.getElementById('form-btn-next')
+const downloadBtn: HTMLElement | null =
+  document.getElementById('form-btn-download')
 
 let active = 1
+downloadBtnFunc()
 progressSteps.forEach((step, i) => {
   step.addEventListener('click', () => {
     active = i + 1
@@ -125,6 +133,7 @@ const cvEducationSection: HTMLElement | null = document.querySelector(
 const cvExperienceSection: HTMLElement | null = document.querySelector(
   '.cv-right-experience'
 )
+const cvContainer: HTMLElement | null = document.querySelector('.cv-container')
 
 cvPersonalInfoSection?.addEventListener('click', () => {
   active = 1
@@ -204,7 +213,6 @@ userPersonalInfoBtn?.addEventListener('click', (e: Event) => {
   updatePersonalInfo()
   clearPersonalInfoForm()
 })
-
 userContactBtn?.addEventListener('click', (e: Event) => {
   e.preventDefault()
 
@@ -218,7 +226,6 @@ userContactBtn?.addEventListener('click', (e: Event) => {
   updateContactInfo()
   clearContactInfoForm()
 })
-
 userSkillBtn?.addEventListener('click', (e: Event) => {
   e.preventDefault()
 
@@ -233,7 +240,6 @@ userSkillBtn?.addEventListener('click', (e: Event) => {
   FormMessageShow('Skill Added Successfully..You can Add More')
   clearSkillForm()
 })
-
 userEducationBtn?.addEventListener('click', (e: Event) => {
   e.preventDefault()
 
@@ -254,7 +260,6 @@ userEducationBtn?.addEventListener('click', (e: Event) => {
   FormMessageShow('Education Added Successfully..You can Add More')
   clearEducationForm()
 })
-
 userExperienceBtn?.addEventListener('click', (e: Event) => {
   e.preventDefault()
 
@@ -284,9 +289,18 @@ nextBtn?.addEventListener('click', e => {
   active++
   updateForm()
 })
+// downloadBtn?.addEventListener('click', () => {
+//   e.preventDefault();
+//   const firstName = userFirstNameInput?.value || 'FirstName'
+//   const lastName = userLastNameInput?.value || 'LastName'
+//   const fileName = ''.concat(firstName, '_').concat(lastName, '_resume.pdf')
+
+//   downloadCVFunc(fileName, '.cv-container')
+// })
 
 function updateForm () {
   formSteps.forEach((step, i) => {
+    downloadBtnFunc()
     if (i == active - 1) {
       step.classList.add('active')
       progressSteps[i].classList.add('active')
@@ -515,3 +529,44 @@ function loadToContactForm (): void {
 function scrollTop () {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
+function downloadBtnFunc () {
+  if (active == 5) {
+    if (nextBtn) nextBtn.style.display = 'none'
+    if (downloadBtn) downloadBtn.style.display = 'block'
+  } else {
+    if (downloadBtn) downloadBtn.style.display = 'none'
+    if (nextBtn) nextBtn.style.display = 'block'
+  }
+}
+
+// const downloadCVFunc = async (fileName: string, sectionSelector: string) => {
+//   try {
+//     // Select the section of the page to be converted
+//     const sectionElement = document.querySelector(sectionSelector)
+
+//     if (!sectionElement) {
+//       throw new Error(`No element found with selector: ${sectionSelector}`)
+//     }
+
+//     // Get the HTML content of the selected section
+//     const html = sectionElement.outerHTML
+
+//     // Configure PDF generation options
+//     const options: HTML2PDFOptions = {
+//       format: 'A4',
+//       filePath: `${fileName}.pdf`, // Use the provided file name
+//       landscape: false, // Portrait mode
+//       resolution: {
+//         height: 1920,
+//         width: 1080 // Resolution can be adjusted as needed
+//       }
+//     }
+
+//     // Generate the PDF
+//     await html2pdf.createPDF(html, options)
+
+//     console.log(`CV downloaded as: ${fileName}.pdf`)
+//   } catch (error) {
+//     console.error('Error generating PDF')
+//   }
+// }
